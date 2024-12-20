@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -30,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -45,11 +43,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             CineNowTheme {
                 var nowPlayingMovies by remember { mutableStateOf<List<MovieDto>>(emptyList()) }
+                var topRatedMovies by remember { mutableStateOf<List<MovieDto>>(emptyList()) }
+                var popularMovies by remember { mutableStateOf<List<MovieDto>>(emptyList()) }
+                var upcomingMovies by remember { mutableStateOf<List<MovieDto>>(emptyList()) }
 
                 val apiService = RetrofitClient.retrofitInstance.create(ApiService::class.java)
-                val callNowPlaying = apiService.getNowPlayingMovies()
 
-                callNowPlaying.enqueue(object : Callback<MovieResponse> {
+                val callTopRated = apiService.getNowPlayingMovies()
+                callTopRated.enqueue(object : Callback<MovieResponse> {
                     override fun onResponse(
                         call: Call<MovieResponse>,
                         response: Response<MovieResponse>
@@ -67,6 +68,71 @@ class MainActivity : ComponentActivity() {
                     override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
                         Log.d("MainActivity", "Network Error :: ${t.message}")
                     }
+                })
+
+                val callTopRatedMovies = apiService.getTopRatedMovies()
+                callTopRatedMovies.enqueue(object : Callback<MovieResponse> {
+                    override fun onResponse(
+                        call: Call<MovieResponse>,
+                        response: Response<MovieResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            val movies = response.body()?.results
+                            if (movies != null) {
+                                topRatedMovies = movies
+                            }
+                        } else {
+                            Log.d("MainActivity", "Request Error :: ${response.errorBody()}")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+                        Log.d("MainActivity", "Network Error :: ${t.message}")
+                    }
+
+                })
+
+                val callPopular = apiService.getPopularMovies()
+                callPopular.enqueue(object : Callback<MovieResponse> {
+                    override fun onResponse(
+                        call: Call<MovieResponse>,
+                        response: Response<MovieResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            val movies = response.body()?.results
+                            if (movies != null) {
+                                popularMovies = movies
+                            }
+                        } else {
+                            Log.d("MainActivity", "Request Error :: ${response.errorBody()}")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+                        Log.d("MainActivity", "Network Error :: ${t.message}")
+                    }
+
+                })
+
+                val callUpcomingMovies = apiService.getUpcomingMovies()
+                callUpcomingMovies.enqueue(object : Callback<MovieResponse>{
+                    override fun onResponse(
+                        call: Call<MovieResponse>,
+                        response: Response<MovieResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            val movies = response.body()?.results
+                            if (movies != null) {
+                                upcomingMovies = movies
+                            }
+                        } else {
+                            Log.d("MainActivity", "Request Error :: ${response.errorBody()}")
+                        }                    }
+
+                    override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+                        Log.d("MainActivity", "Network Error :: ${t.message}")
+                    }
+
                 })
 
                 // A surface container using the 'background' color from the theme
@@ -87,8 +153,32 @@ class MainActivity : ComponentActivity() {
                         )
 
                         MovieSession(
+                            label = "Top rated",
+                            movieList = topRatedMovies,
+                            onClick = { movieClicked ->
+
+                            }
+                        )
+
+                        MovieSession(
                             label = "Now Playing",
                             movieList = nowPlayingMovies,
+                            onClick = { movieClicked ->
+
+                            }
+                        )
+
+                        MovieSession(
+                            label = "Popular",
+                            movieList = popularMovies,
+                            onClick = { movieClicked ->
+
+                            }
+                        )
+
+                        MovieSession(
+                            label = "Upcoming",
+                            movieList = upcomingMovies,
                             onClick = { movieClicked ->
 
                             }
