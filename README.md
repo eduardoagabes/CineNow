@@ -1,17 +1,17 @@
 # CineNow APP
-CineNow é um aplicativo Android que permite aos usuários explorar filmes populares em tempo real, obtendo informações diretamente da API do The Movie Database (TMDB). Com uma interface amigável, os usuários podem visualizar detalhes de filmes, incluindo sinopse, data de lançamento, classificação, e muito mais.
+CineNow es una aplicación para Android que permite a los usuarios explorar películas populares en tiempo real, obteniendo información directamente de la API de The Movie Database (TMDB). Con una interfaz fácil de usar, los usuarios pueden ver los detalles de la película, incluyendo la sinopsis, fecha de lanzamiento, calificación, y mucho más.
 
-Funcionalidades
-- Filmes Populares: Visualize uma lista de filmes populares atualizada diariamente.
-- Detalhes do Filme: Obtenha informações detalhadas sobre cada filme, como título, sinopse, data de lançamento, classificação, e cartaz.
-- Interface Intuitiva: Navegação fácil e design limpo para uma melhor experiência do usuário.
+Características
+- Películas populares: consulte una lista de películas populares actualizada diariamente.
+- Detalles de la película: Obtenga información detallada sobre cada película, como el título, la sinopsis, la fecha de estreno, la clasificación y el póster.
+- Interfaz intuitiva: navegación sencilla y diseño limpio para una mejor experiencia de usuario.
 
 ## :camera_flash: Screenshots
 <!-- You can add more screenshots here if you like -->
 <img src="https://github.com/ComunidadeDevSpace/CineNow/assets/11612508/9690f66d-fb65-4cd7-82db-954473cb6c2d" width=260/> <img src="https://github.com/ComunidadeDevSpace/CineNow/assets/11612508/f8006a40-8855-4d6f-b9b9-a44a8c991fe1" width=260/>
 
 
-## Tecnologias
+## Tecnologías
 - 100% Kotlin
 - Compose
   - Column
@@ -30,7 +30,7 @@ Funcionalidades
 ```
 The MIT License (MIT)
 
-Copyright (c) 2024 Roque Buarque Junior
+Copyright (c) 2025 Eduardo Agabes
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
